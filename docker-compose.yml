@@ -1,0 +1,20 @@
+
+services:
+  liquibase:
+    image: liquibase/liquibase
+    volumes:
+      - ./migrations:/liquibase/changelog
+    command: "--url=jdbc:postgresql://postgres:5432/videoconference \
+    --username=user \
+    --password=password \
+    --changeLogFile=/changelog/changelog.xml \
+    update"
+    networks:
+      - messenger
+
+networks:
+  messenger:
+    external: true
+
+volumes:
+  pgdata:
